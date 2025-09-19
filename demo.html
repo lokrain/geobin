@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geobin - Mapbox Playground (Demo)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Geobin - Mapbox Playground (Demo)</h1>
+            <p>Interactive geospatial data visualization - Demo mode</p>
+        </header>
+        
+        <div id="controls">
+            <div class="control-group">
+                <label for="map-style">Map Style:</label>
+                <select id="map-style">
+                    <option value="streets">Streets</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="satellite">Satellite</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <button id="add-marker">Add Marker</button>
+                <button id="draw-polygon">Draw Polygon</button>
+                <button id="clear-all">Clear All</button>
+            </div>
+            
+            <div class="control-group">
+                <label for="geojson-input">Load GeoJSON:</label>
+                <input type="file" id="geojson-input" accept=".json,.geojson">
+            </div>
+        </div>
+        
+        <div id="map-container">
+            <div id="demo-map">
+                <div class="demo-content">
+                    <h3>🗺️ Demo Map Area</h3>
+                    <p>This is a demo version showing the interface layout.</p>
+                    <p>For the full interactive experience with Mapbox GL JS:</p>
+                    <ol>
+                        <li>Get a Mapbox access token from <a href="https://www.mapbox.com/" target="_blank">mapbox.com</a></li>
+                        <li>Replace the token in <code>script.js</code></li>
+                        <li>Open <code>index.html</code> in your browser</li>
+                    </ol>
+                    
+                    <div class="demo-features">
+                        <h4>Features Available:</h4>
+                        <ul>
+                            <li>✅ Interactive map controls</li>
+                            <li>✅ Multiple map styles</li>
+                            <li>✅ Marker placement</li>
+                            <li>✅ Polygon drawing</li>
+                            <li>✅ GeoJSON file loading</li>
+                            <li>✅ Responsive design</li>
+                            <li>✅ Real-time coordinates</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sample-data">
+                        <h4>Sample Data Included:</h4>
+                        <p>Load <code>sample-data.geojson</code> to see NYC landmarks and areas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="info-panel">
+            <h3>Map Information</h3>
+            <div id="coordinates">Demo Mode - Click coordinates will appear here</div>
+            <div id="zoom-level">Zoom: 10.00</div>
+            <div id="data-info">
+                <h4>Loaded Data</h4>
+                <ul id="data-list">
+                    <li style="font-style: italic; color: #999;">Demo mode - data will appear here</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Demo mode functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Mapbox Playground Demo Mode loaded');
+            
+            // Simulate some interactivity
+            let markerCount = 0;
+            let polygonCount = 0;
+            
+            document.getElementById('add-marker').addEventListener('click', () => {
+                markerCount++;
+                updateDataList();
+                alert(`Demo: Marker ${markerCount} would be added to the map`);
+            });
+            
+            document.getElementById('draw-polygon').addEventListener('click', () => {
+                polygonCount++;
+                updateDataList();
+                alert(`Demo: Polygon ${polygonCount} drawing mode would be activated`);
+            });
+            
+            document.getElementById('clear-all').addEventListener('click', () => {
+                markerCount = 0;
+                polygonCount = 0;
+                updateDataList();
+                alert('Demo: All markers and polygons would be cleared');
+            });
+            
+            document.getElementById('map-style').addEventListener('change', (e) => {
+                alert(`Demo: Map style changed to ${e.target.value}`);
+            });
+            
+            document.getElementById('geojson-input').addEventListener('change', (e) => {
+                if (e.target.files[0]) {
+                    alert(`Demo: Would load GeoJSON file: ${e.target.files[0].name}`);
+                }
+            });
+            
+            function updateDataList() {
+                const dataList = document.getElementById('data-list');
+                dataList.innerHTML = '';
+                
+                for (let i = 1; i <= markerCount; i++) {
+                    const li = document.createElement('li');
+                    li.textContent = `Demo Marker ${i}`;
+                    dataList.appendChild(li);
+                }
+                
+                for (let i = 1; i <= polygonCount; i++) {
+                    const li = document.createElement('li');
+                    li.textContent = `Demo Polygon ${i}`;
+                    dataList.appendChild(li);
+                }
+                
+                if (markerCount === 0 && polygonCount === 0) {
+                    const li = document.createElement('li');
+                    li.textContent = 'Demo mode - data will appear here';
+                    li.style.fontStyle = 'italic';
+                    li.style.color = '#999';
+                    dataList.appendChild(li);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geobin - Mapbox Playground</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Geobin - Mapbox Playground</h1>
+            <p>Explore and visualize geospatial data with interactive maps</p>
+        </header>
+        
+        <div id="controls">
+            <div class="control-group">
+                <label for="map-style">Map Style:</label>
+                <select id="map-style">
+                    <option value="mapbox://styles/mapbox/streets-v11">Streets</option>
+                    <option value="mapbox://styles/mapbox/light-v10">Light</option>
+                    <option value="mapbox://styles/mapbox/dark-v10">Dark</option>
+                    <option value="mapbox://styles/mapbox/satellite-v9">Satellite</option>
+                    <option value="mapbox://styles/mapbox/satellite-streets-v11">Satellite Streets</option>
+                    <option value="mapbox://styles/mapbox/outdoors-v11">Outdoors</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <button id="add-marker">Add Marker</button>
+                <button id="draw-polygon">Draw Polygon</button>
+                <button id="clear-all">Clear All</button>
+            </div>
+            
+            <div class="control-group">
+                <label for="geojson-input">Load GeoJSON:</label>
+                <input type="file" id="geojson-input" accept=".json,.geojson">
+            </div>
+        </div>
+        
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+        
+        <div id="info-panel">
+            <h3>Map Information</h3>
+            <div id="coordinates">Click on the map to see coordinates</div>
+            <div id="zoom-level">Zoom: -</div>
+            <div id="data-info">
+                <h4>Loaded Data</h4>
+                <ul id="data-list"></ul>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
